@@ -1,8 +1,8 @@
-height_mm = 80;
+height_mm = 45;
 beam_width_mm = 40;
 thickness_mm = 10;
 overlap_mm = 3;
-hole_diam_mm = 8;
+hole_diam_mm = 6;
 
 module fixing() {
     difference() {
