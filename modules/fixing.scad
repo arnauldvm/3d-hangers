@@ -13,9 +13,9 @@ module fixing() {
             linear_extrude(height_mm)
             union() {
                 difference() {
-                    square([beam_width_mm+thickness_mm+overlap_mm-2*rounding_mm,beam_width_mm+thickness_mm+overlap_mm-2*rounding_mm]);
-                    translate([thickness_mm-2*rounding_mm, thickness_mm-2*rounding_mm]) square([beam_width_mm+2*rounding_mm,beam_width_mm+2*rounding_mm]);
-                    translate([thickness_mm+overlap_mm-rounding_mm, thickness_mm+overlap_mm-rounding_mm]) square([beam_width_mm+1,beam_width_mm+1]);
+                    square(beam_width_mm+thickness_mm+overlap_mm-2*rounding_mm);
+                    translate([thickness_mm-2*rounding_mm, thickness_mm-2*rounding_mm]) square(beam_width_mm+2*rounding_mm);
+                    translate([thickness_mm+overlap_mm-rounding_mm, thickness_mm+overlap_mm-rounding_mm]) square(beam_width_mm+1);
                 }
                 translate([thickness_mm-2*rounding_mm, thickness_mm-2*rounding_mm]) difference() {
                     square(2*rounding_mm);
