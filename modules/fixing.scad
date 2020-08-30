@@ -15,7 +15,7 @@ module fixing() {
                 difference() {
                     square(beam_width_mm+thickness_mm+overlap_width_mm-2*rounding_mm);
                     translate([thickness_mm-2*rounding_mm, thickness_mm-2*rounding_mm]) square(beam_width_mm+2*rounding_mm);
-                    translate([thickness_mm+overlap_width_mm-rounding_mm, thickness_mm+overlap_width_mm-rounding_mm]) square(beam_width_mm+1);
+                    translate([thickness_mm+overlap_width_mm-2*rounding_mm, thickness_mm+overlap_width_mm-2*rounding_mm]) square(beam_width_mm+1);
                 }
                 translate([thickness_mm-2*rounding_mm, thickness_mm-2*rounding_mm]) difference() {
                     square(2*rounding_mm);
