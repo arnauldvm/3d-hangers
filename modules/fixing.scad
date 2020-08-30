@@ -6,6 +6,8 @@ overlap_width_mm = 4.1; // 3 was too small for minkowski, 4 was too small too
 overlap_length_mm = 4;
 hole_diam_mm = 6;
 hole_pos_mm = 24;
+countersink_diam_mm = 10;
+countersink_depth_mm = 3;
 rounding_mm = 2;
 
 module fixing() {
@@ -33,8 +35,14 @@ module fixing() {
             }
             sphere(r=rounding_mm);
         }
+        translate([kernel_thickness_mm+rounding_mm+hole_pos_mm, -1-rounding_mm, height_mm/2]) rotate([-90,0,0]) {
             cylinder($fn=60, h=thickness_mm+2, d=hole_diam_mm);
+            cylinder($fn=60, h=countersink_depth_mm+1, d=countersink_diam_mm);
+        }
+        translate([-1-rounding_mm, kernel_thickness_mm+rounding_mm+hole_pos_mm, height_mm/2]) rotate([0,90,0]) {
             cylinder($fn=60, h=thickness_mm+2, d=hole_diam_mm);
+            cylinder($fn=60, h=countersink_depth_mm+1, d=countersink_diam_mm);
+        }
     }
 }
 
