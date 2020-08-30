@@ -4,6 +4,7 @@ rounding_mm = 2; // r
 height_mm = 45;
 beam_width_mm = 40; // BW
 beam_rounding_mm = 3; // Br
+outer_beam_rounding_mm = 8; // OBr
 thickness_mm = 10; // T
 assert(thickness_mm>2*rounding_mm, "thickness_mm is too small");
 overlap_width_mm = 4.1; // OW; 3 was too small for minkowski, 4 was too small too
@@ -37,6 +38,7 @@ module fixing(with_notches=true) {
     kernel_height_mm = height_mm-2*rounding_mm;
     kernel_thickness_mm = thickness_mm-2*rounding_mm; // kT
     kernel_beam_rounding_mm = beam_rounding_mm+rounding_mm; // kBr
+    kernel_outer_beam_rounding_mm = outer_beam_rounding_mm-rounding_mm; // kOBr
 
     difference() {
         translate([rounding_mm, rounding_mm, rounding_mm])
