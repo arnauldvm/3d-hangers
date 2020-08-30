@@ -1,5 +1,6 @@
 height_mm = 45;
 beam_width_mm = 40;
+beam_rounding_mm = 3;
 thickness_mm = 10;
 overlap_width_mm = 4.1; // 3 was too small for minkowski, 4 was too small too
 overlap_length_mm = 4;
@@ -19,8 +20,8 @@ module fixing() {
                     translate([thickness_mm+overlap_length_mm-2*rounding_mm, thickness_mm+overlap_length_mm-2*rounding_mm]) square(beam_width_mm+1);
                 }
                 translate([thickness_mm-2*rounding_mm, thickness_mm-2*rounding_mm]) difference() {
-                    square(2*rounding_mm);
-                    translate([2*rounding_mm, 2*rounding_mm]) circle($fn=20, r=2*rounding_mm);
+                    square(beam_rounding_mm+rounding_mm);
+                    translate([beam_rounding_mm+rounding_mm, beam_rounding_mm+rounding_mm]) circle($fn=20, r=beam_rounding_mm+rounding_mm);
                 }
             }
             sphere(r=rounding_mm);
