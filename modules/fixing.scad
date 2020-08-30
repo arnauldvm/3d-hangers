@@ -14,6 +14,11 @@ hole_diam_mm = 6; // HD
 hole_pos_mm = 24; // HP
 countersink_diam_mm = 10; // CsW
 countersink_depth_mm = 3; // CsS
+notch_pos_mm = 5;
+notch_entry_width_mm = 3; // EW
+notch_entry_depth_mm = 3; // ED
+notch_corner_width_mm = 2; // EW'
+notch_corner_depth_mm = 2; // ED'
 
 module fixing() {
     // "kernel" measures = measures before rounding (minkowski)
