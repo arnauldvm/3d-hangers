@@ -9,25 +9,29 @@ hole_pos_mm = 24;
 rounding_mm = 2;
 
 module fixing() {
+    // "kernel" measures = measures before rounding (minkowski)
+    kernel_thickness_mm = thickness_mm-2*rounding_mm;
+    kernel_beam_rounding_mm = beam_rounding_mm+rounding_mm;
+
     difference() {
         minkowski() {
             $fn = 20; // no need for many facets here
             linear_extrude(height_mm)
             union() {
                 difference() {
-                    square(beam_width_mm+thickness_mm+overlap_width_mm-2*rounding_mm);
-                    translate([thickness_mm-2*rounding_mm, thickness_mm-2*rounding_mm]) square(beam_width_mm+2*rounding_mm);
-                    translate([thickness_mm+overlap_length_mm-2*rounding_mm, thickness_mm+overlap_length_mm-2*rounding_mm]) square(beam_width_mm+1);
+                    square(beam_width_mm+kernel_thickness_mm+overlap_width_mm);
+                    translate([kernel_thickness_mm, kernel_thickness_mm]) square(beam_width_mm+2*rounding_mm);
+                    translate([kernel_thickness_mm+overlap_length_mm, kernel_thickness_mm+overlap_length_mm]) square(beam_width_mm+1);
                 }
-                translate([thickness_mm-2*rounding_mm, thickness_mm-2*rounding_mm]) difference() {
-                    square(beam_rounding_mm+rounding_mm);
-                    translate([beam_rounding_mm+rounding_mm, beam_rounding_mm+rounding_mm]) circle($fn=20, r=beam_rounding_mm+rounding_mm);
+                translate([kernel_thickness_mm, kernel_thickness_mm]) difference() {
+                    square(kernel_beam_rounding_mm);
+                    translate([kernel_beam_rounding_mm, kernel_beam_rounding_mm]) circle($fn=20, r=kernel_beam_rounding_mm);
                 }
             }
             sphere(r=rounding_mm);
         }
-        translate([thickness_mm+hole_pos_mm-rounding_mm, -1-rounding_mm, height_mm/2]) rotate([-90,0,0]) cylinder($fn=60, h=thickness_mm+2*rounding_mm+2, d=hole_diam_mm);
-        translate([-1-rounding_mm, thickness_mm+hole_pos_mm-rounding_mm, height_mm/2]) rotate([0,90,0]) cylinder($fn=60, h=thickness_mm+2*rounding_mm+2, d=hole_diam_mm);
+        translate([kernel_thickness_mm+rounding_mm+hole_pos_mm, -1-rounding_mm, height_mm/2]) rotate([-90,0,0]) cylinder($fn=60, h=thickness_mm+2*rounding_mm+2, d=hole_diam_mm);
+        translate([-1-rounding_mm, kernel_thickness_mm+rounding_mm+hole_pos_mm, height_mm/2]) rotate([0,90,0]) cylinder($fn=60, h=thickness_mm+2*rounding_mm+2, d=hole_diam_mm);
     }
 }
 
