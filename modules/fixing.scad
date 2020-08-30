@@ -33,10 +33,8 @@ module fixing() {
             }
             sphere(r=rounding_mm);
         }
-        translate([kernel_thickness_mm+rounding_mm+hole_pos_mm, -1-rounding_mm, height_mm/2]) rotate([-90,0,0])
-            cylinder($fn=60, h=thickness_mm+2*rounding_mm+2, d=hole_diam_mm);
-        translate([-1-rounding_mm, kernel_thickness_mm+rounding_mm+hole_pos_mm, height_mm/2]) rotate([0,90,0])
-            cylinder($fn=60, h=thickness_mm+2*rounding_mm+2, d=hole_diam_mm);
+            cylinder($fn=60, h=thickness_mm+2, d=hole_diam_mm);
+            cylinder($fn=60, h=thickness_mm+2, d=hole_diam_mm);
     }
 }
 
