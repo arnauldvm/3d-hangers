@@ -17,13 +17,14 @@ countersink_depth_mm = 3;
 
 module fixing() {
     // "kernel" measures = measures before rounding (minkowski)
+    kernel_height_mm = height_mm-2*rounding_mm;
     kernel_thickness_mm = thickness_mm-2*rounding_mm;
     kernel_beam_rounding_mm = beam_rounding_mm+rounding_mm;
 
     difference() {
         minkowski() {
             $fn = 20; // no need for many facets here
-            linear_extrude(height_mm)
+            linear_extrude(kernel_height_mm)
             union() {
                 difference() {
                     square(beam_width_mm+kernel_thickness_mm+overlap_width_mm);
@@ -40,11 +41,11 @@ module fixing() {
             }
             sphere(r=rounding_mm);
         }
-        translate([kernel_thickness_mm+rounding_mm+hole_pos_mm, -1-rounding_mm, height_mm/2]) rotate([-90,0,0]) {
+        translate([kernel_thickness_mm+rounding_mm+hole_pos_mm, -1-rounding_mm, height_mm/2-rounding_mm]) rotate([-90,0,0]) {
             cylinder($fn=60, h=thickness_mm+2, d=hole_diam_mm);
             cylinder($fn=60, h=countersink_depth_mm+1, d=countersink_diam_mm);
         }
-        translate([-1-rounding_mm, kernel_thickness_mm+rounding_mm+hole_pos_mm, height_mm/2]) rotate([0,90,0]) {
+        translate([-1-rounding_mm, kernel_thickness_mm+rounding_mm+hole_pos_mm, height_mm/2-rounding_mm]) rotate([0,90,0]) {
             cylinder($fn=60, h=thickness_mm+2, d=hole_diam_mm);
             cylinder($fn=60, h=countersink_depth_mm+1, d=countersink_diam_mm);
         }
