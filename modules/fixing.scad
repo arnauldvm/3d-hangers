@@ -52,6 +52,11 @@ module fixing(with_notches=true) {
                         square(beam_width_mm+2*rounding_mm);
                     translate([kernel_thickness_mm+overlap_length_mm, kernel_thickness_mm+overlap_length_mm])
                         square(beam_width_mm+1);
+                    difference() {
+                        square(kernel_outer_beam_rounding_mm);
+                        translate([kernel_outer_beam_rounding_mm, kernel_outer_beam_rounding_mm])
+                            circle($fn=20, r=kernel_outer_beam_rounding_mm);
+                    }
                 }
                 translate([kernel_thickness_mm, kernel_thickness_mm]) difference() {
                     square(kernel_beam_rounding_mm);
