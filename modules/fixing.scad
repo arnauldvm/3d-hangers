@@ -1,3 +1,5 @@
+// See fixing.png for guidance
+
 height_mm = 45;
 beam_width_mm = 40;
 beam_rounding_mm = 3;
