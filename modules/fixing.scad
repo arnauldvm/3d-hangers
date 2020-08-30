@@ -1,16 +1,19 @@
 // See fixing.png for guidance
 
+rounding_mm = 2;
 height_mm = 45;
 beam_width_mm = 40;
 beam_rounding_mm = 3;
 thickness_mm = 10;
+assert(thickness_mm>2*rounding_mm, "thickness_mm is too small");
 overlap_width_mm = 4.1; // 3 was too small for minkowski, 4 was too small too
+assert(overlap_width_mm>2*rounding_mm, "overlap_width_mm is too small");
 overlap_length_mm = 4;
+assert(overlap_length_mm>rounding_mm, "overlap_length_mm is too small");
 hole_diam_mm = 6;
 hole_pos_mm = 24;
 countersink_diam_mm = 10;
 countersink_depth_mm = 3;
-rounding_mm = 2;
 
 module fixing() {
     // "kernel" measures = measures before rounding (minkowski)
