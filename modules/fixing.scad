@@ -15,12 +15,24 @@ hole_pos_mm = 24; // HP
 countersink_diam_mm = 10; // CsW
 countersink_depth_mm = 3; // CsS
 notch_pos_mm = 5;
+notch_height_mm = height_mm-10;
 notch_entry_width_mm = 3; // EW
 notch_entry_depth_mm = 3; // ED
 notch_corner_width_mm = 2; // EW'
 notch_corner_depth_mm = 2; // ED'
 
-module fixing() {
+module notch() {
+    translate([0,0,height_mm-notch_height_mm])
+    linear_extrude(notch_height_mm+1)
+    union() {
+        translate([-notch_entry_width_mm/2, 0])
+            square([notch_entry_width_mm, notch_entry_depth_mm]);
+        translate([-notch_entry_width_mm/2-notch_corner_width_mm, notch_entry_depth_mm])
+            square([notch_entry_width_mm+2*notch_corner_width_mm, notch_corner_depth_mm]);
+    }
+}
+
+module fixing(with_notches=true) {
     // "kernel" measures = measures before rounding (minkowski)
     kernel_height_mm = height_mm-2*rounding_mm;
     kernel_thickness_mm = thickness_mm-2*rounding_mm; // kT
@@ -55,7 +67,13 @@ module fixing() {
             cylinder($fn=60, h=thickness_mm+2, d=hole_diam_mm);
             cylinder($fn=60, h=countersink_depth_mm+1, d=countersink_diam_mm);
         }
+        if (with_notches) {
+            translate([thickness_mm+notch_pos_mm, 0, 0]) notch();
+            translate([thickness_mm+beam_width_mm-notch_pos_mm, 0, 0]) notch();
+            translate([0, thickness_mm+notch_pos_mm, 0]) rotate([0,0,-90]) notch();
+            translate([0, thickness_mm+beam_width_mm-notch_pos_mm, 0]) rotate([0,0,-90]) notch();
+        }
     }
 }
 
-fixing();
+fixing(true);
