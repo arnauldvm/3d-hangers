@@ -1,7 +1,7 @@
 height_mm = 45;
 beam_width_mm = 40;
 thickness_mm = 10;
-overlap_mm = 4.1; // 3 was too small for minkowski, 4 was too small too
+overlap_width_mm = 4.1; // 3 was too small for minkowski, 4 was too small too
 hole_diam_mm = 6;
 hole_pos_mm = 24;
 rounding_mm = 2;
@@ -13,9 +13,9 @@ module fixing() {
             linear_extrude(height_mm)
             union() {
                 difference() {
-                    square(beam_width_mm+thickness_mm+overlap_mm-2*rounding_mm);
+                    square(beam_width_mm+thickness_mm+overlap_width_mm-2*rounding_mm);
                     translate([thickness_mm-2*rounding_mm, thickness_mm-2*rounding_mm]) square(beam_width_mm+2*rounding_mm);
-                    translate([thickness_mm+overlap_mm-rounding_mm, thickness_mm+overlap_mm-rounding_mm]) square(beam_width_mm+1);
+                    translate([thickness_mm+overlap_width_mm-rounding_mm, thickness_mm+overlap_width_mm-rounding_mm]) square(beam_width_mm+1);
                 }
                 translate([thickness_mm-2*rounding_mm, thickness_mm-2*rounding_mm]) difference() {
                     square(2*rounding_mm);
