@@ -22,15 +22,52 @@ notch_entry_depth_mm = 3; // ED
 notch_corner_width_mm = 2; // EW'
 notch_corner_depth_mm = 2; // ED'
 
-module notch() {
-    translate([0,0,height_mm-notch_height_mm])
-    linear_extrude(notch_height_mm+1)
-    union() {
-        translate([-notch_entry_width_mm/2, 0])
-            square([notch_entry_width_mm, notch_entry_depth_mm]);
-        translate([-notch_entry_width_mm/2-notch_corner_width_mm, notch_entry_depth_mm])
-            square([notch_entry_width_mm+2*notch_corner_width_mm, notch_corner_depth_mm]);
+rail_play_mm = 0.1;
+
+module rail(play_mm=rail_play_mm, height_offset_mm=0) {
+    actual_height_mm = notch_height_mm + height_offset_mm - play_mm;
+    actual_entry_width_mm = notch_entry_width_mm - 2*rail_play_mm;
+    actual_entry_depth_mm = notch_entry_depth_mm + 2*rail_play_mm;
+    actual_corner_width_mm = notch_corner_width_mm;
+    actual_corner_depth_mm = notch_corner_depth_mm - 2*rail_play_mm;
+    entry_overflow_mm = 1;
+
+    translate([0,0,height_mm-actual_height_mm+play_mm])
+    difference() {
+        linear_extrude(actual_height_mm)
+        union() {
+            translate([-actual_entry_width_mm/2, -entry_overflow_mm])
+                square([actual_entry_width_mm, actual_entry_depth_mm+entry_overflow_mm]);
+            translate([-actual_entry_width_mm/2-actual_corner_width_mm, actual_entry_depth_mm])
+                square([actual_entry_width_mm+2*actual_corner_width_mm, actual_corner_depth_mm]);
+        }
+
+        // bottom rounding
+        d = actual_entry_width_mm+2*actual_corner_width_mm;
+        translate([0, -1, d/2])
+        rotate([-90,0,0])
+        linear_extrude(actual_entry_depth_mm+actual_corner_depth_mm+2)
+        difference() {
+            translate([-d/2-1,0]) square([d+2, d/2+1]);
+            circle(d=d);
+        }
     }
+}
+
+module rails_x2(along="x", play_mm=rail_play_mm, height_offset_mm=0, center=true) {
+    rotation = along=="x"?0:along=="y"?90:undef;
+    rotate([0,0,rotation]) translate([center?-thickness_mm-beam_width_mm/2:0,0,center?-height_mm/2:0]) {
+        translate([thickness_mm+notch_pos_mm, 0, 0]) rotate([0,0,-2*rotation]) rail(play_mm, height_offset_mm);
+        translate([thickness_mm+beam_width_mm-notch_pos_mm, 0, 0]) rotate([0,0,-2*rotation]) rail(play_mm, height_offset_mm);
+    }
+}
+
+module notch() {
+    rail(play_mm=0, height_offset_mm=1);
+}
+
+module notches_x2(along="x", center=false) {
+    rails_x2(along=along, play_mm=0, height_offset_mm=1, center=center);
 }
 
 module fixing(with_notches=true) {
@@ -75,10 +112,8 @@ module fixing(with_notches=true) {
             cylinder($fn=60, h=countersink_depth_mm+1, d=countersink_diam_mm);
         }
         if (with_notches) {
-            translate([thickness_mm+notch_pos_mm, 0, 0]) notch();
-            translate([thickness_mm+beam_width_mm-notch_pos_mm, 0, 0]) notch();
-            translate([0, thickness_mm+notch_pos_mm, 0]) rotate([0,0,-90]) notch();
-            translate([0, thickness_mm+beam_width_mm-notch_pos_mm, 0]) rotate([0,0,-90]) notch();
+            notches_x2("x");
+            notches_x2("y");
         }
     }
 }
