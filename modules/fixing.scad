@@ -13,8 +13,8 @@ overlap_length_mm = 4; // OL
 assert(overlap_length_mm>rounding_mm, "overlap_length_mm is too small");
 hole_diam_mm = 6; // HD
 hole_pos_mm = 24; // HP
-countersink_diam_mm = 10; // CsW
-countersink_depth_mm = 3; // CsS
+countersink_diam_mm = 14; // CsW
+countersink_depth_mm = 4; // CsS
 notch_pos_mm = 5;
 notch_height_mm = height_mm-10;
 notch_entry_width_mm = 3; // EW
