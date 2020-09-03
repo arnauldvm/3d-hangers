@@ -119,3 +119,28 @@ module fixing(with_notches=true) {
 }
 
 fixing(true);
+
+// Tests
+
+module rails_test() {
+    test_width_mm = beam_width_mm+overlap_width_mm+thickness_mm;
+    union() {
+        $fn = 20;
+        translate([-beam_width_mm/2-thickness_mm, -thickness_mm/2, -height_mm/2]) cube([test_width_mm, thickness_mm/2, height_mm]);
+        notches_x2("x", center=true);
+    }
+}
+
+module notches_test() {
+    test_width_mm = beam_width_mm+overlap_width_mm+thickness_mm;
+    difference() {
+        $fn = 20;
+        translate([-beam_width_mm/2-thickness_mm, 0, -height_mm/2]) cube([test_width_mm, thickness_mm, height_mm]);
+        translate([0, 0, 1]) rails_x2("x", center=true);
+    }
+}
+
+module all_tests() {
+    translate([0, thickness_mm]) notches_test();
+    translate([0, -thickness_mm]) rails_test();
+}
