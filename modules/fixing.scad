@@ -26,10 +26,10 @@ rail_play_mm = 0.1;
 
 module rail(play_mm=rail_play_mm, height_offset_mm=0) {
     actual_height_mm = notch_height_mm + height_offset_mm - play_mm;
-    actual_entry_width_mm = notch_entry_width_mm - 2*rail_play_mm;
-    actual_entry_depth_mm = notch_entry_depth_mm + 2*rail_play_mm;
+    actual_entry_width_mm = notch_entry_width_mm - 2*play_mm;
+    actual_entry_depth_mm = notch_entry_depth_mm + 2*play_mm;
     actual_corner_width_mm = notch_corner_width_mm;
-    actual_corner_depth_mm = notch_corner_depth_mm - 2*rail_play_mm;
+    actual_corner_depth_mm = notch_corner_depth_mm - 2*play_mm;
     entry_overflow_mm = 1;
 
     translate([0,0,height_mm-actual_height_mm+play_mm])
