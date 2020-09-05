@@ -127,7 +127,7 @@ module rails_test() {
     union() {
         $fn = 20;
         translate([-beam_width_mm/2-thickness_mm, -thickness_mm/2, -height_mm/2]) cube([test_width_mm, thickness_mm/2, height_mm]);
-        notches_x2("x", center=true);
+        rails_x2("x", center=true);
     }
 }
 
@@ -136,7 +136,7 @@ module notches_test() {
     difference() {
         $fn = 20;
         translate([-beam_width_mm/2-thickness_mm, 0, -height_mm/2]) cube([test_width_mm, thickness_mm, height_mm]);
-        translate([0, 0, 1]) rails_x2("x", center=true);
+        translate([0, 0, 1]) notches_x2("x", center=true);
     }
 }
 
