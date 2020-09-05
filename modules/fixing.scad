@@ -144,3 +144,8 @@ module all_tests() {
     translate([0, thickness_mm]) notches_test();
     translate([0, -thickness_mm]) rails_test();
 }
+
+module visual_test() {
+    color("green") notches_test();
+    color("red") translate([0,-rail_play_mm,0]) rails_test();
+}
