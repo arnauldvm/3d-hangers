@@ -22,7 +22,7 @@ notch_entry_depth_mm = 3; // ED
 notch_corner_width_mm = 2; // EW'
 notch_corner_depth_mm = 2; // ED'
 
-rail_play_mm = 0.1;
+rail_play_mm = 0.3;
 
 module rail(play_mm=rail_play_mm, height_offset_mm=0) {
     actual_height_mm = notch_height_mm + height_offset_mm - play_mm;
