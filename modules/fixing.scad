@@ -32,7 +32,7 @@ module rail(play_mm=rail_play_mm, height_offset_mm=0) {
     actual_corner_depth_mm = notch_corner_depth_mm - 2*play_mm;
     entry_overflow_mm = 1;
 
-    translate([0,0,height_mm-actual_height_mm+play_mm])
+    translate([0,0,height_mm-actual_height_mm])
     difference() {
         linear_extrude(actual_height_mm)
         union() {
