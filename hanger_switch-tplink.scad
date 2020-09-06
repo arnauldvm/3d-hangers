@@ -25,6 +25,9 @@ module hanger() {
     //inner_kernel_height_mm = actual_depth_mm - rounding_mm;
     outer_kernel_height_mm = outer_height_mm - rounding_mm;
 
+    translate([0,0,actual_depth_mm/2 + thickness_mm])
+    rotate([0,-90,0])
+    translate([0, 0, -actual_width_mm/2 - thickness_mm + rounding_mm])
     translate([0, 0, rounding_mm])
     minkowski() {
         $fn = 20; // no need for many facets here
@@ -51,5 +54,5 @@ module hanger() {
 }
 
 hanger();
-translate([0,0,outer_height_mm/2])
+translate([0,0,outer_width_mm/2])
     mirror([0,1,0]) rails_x2("x");
