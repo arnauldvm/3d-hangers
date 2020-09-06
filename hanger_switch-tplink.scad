@@ -13,13 +13,17 @@ actual_width_mm = switch_width_mm + play_mm;
 actual_depth_mm = switch_depth_mm + play_mm;
 actual_height_mm = switch_height_mm + play_mm;
 
+outer_width_mm = actual_width_mm + 2*thickness_mm;
+outer_depth_mm = actual_height_mm + 2*thickness_mm;
+outer_height_mm = actual_depth_mm + thickness_mm;
+
 module hanger() {
     inner_kernel_width_mm = actual_width_mm - 2*rounding_mm;
-    outer_kernel_width_mm = actual_width_mm + 2*thickness_mm - 2*rounding_mm;
+    outer_kernel_width_mm = outer_width_mm - 2*rounding_mm;
     inner_kernel_depth_mm = actual_height_mm - 2*rounding_mm;
-    outer_kernel_depth_mm = actual_height_mm + 2*thickness_mm - 2*rounding_mm;
+    outer_kernel_depth_mm = outer_depth_mm - 2*rounding_mm;
     //inner_kernel_height_mm = actual_depth_mm - rounding_mm;
-    outer_kernel_height_mm = actual_depth_mm + thickness_mm - rounding_mm;
+    outer_kernel_height_mm = outer_height_mm - rounding_mm;
 
     translate([0, 0, rounding_mm])
     minkowski() {
@@ -47,5 +51,5 @@ module hanger() {
 }
 
 hanger();
-translate([0,0,(actual_depth_mm + thickness_mm)/2])
+translate([0,0,outer_height_mm/2])
     mirror([0,1,0]) rails_x2("x");
