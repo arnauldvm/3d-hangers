@@ -32,7 +32,7 @@ module hanger() {
     minkowski() {
         $fn = 20; // no need for many facets here
         union() {
-            linear_extrude([0,0,outer_kernel_height_mm])
+            linear_extrude(outer_kernel_height_mm)
             difference() {
                 translate([-outer_kernel_width_mm/2,rounding_mm])
                     square([outer_kernel_width_mm, outer_kernel_depth_mm]);
