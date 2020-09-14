@@ -33,6 +33,7 @@ module hanger() {
         $fn = 12; // no need for many facets here
         union() {
             linear_extrude(outer_kernel_height_mm)
+            // extrusion base
             difference() {
                 translate([-outer_kernel_width_mm/2,rounding_mm])
                     square([outer_kernel_width_mm, outer_kernel_depth_mm]);
