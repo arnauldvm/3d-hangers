@@ -7,7 +7,7 @@ overlap_length_mm = 4;
 switch_width_mm = 100.0; // 100+0.1 = 99.8 measured
 switch_depth_mm = 98.6;
 switch_height_mm = 25.7; // 26+0.1 = 25.85 measured
-play_mm = 0.1;
+play_mm = 0.3;
 
 actual_width_mm = switch_width_mm + play_mm;
 actual_depth_mm = switch_depth_mm + play_mm;
