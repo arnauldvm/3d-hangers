@@ -31,6 +31,7 @@ module hanger() {
 
     minkowski() {
         $fn = 12; // no need for many facets here
+      difference() {
        translate([0, 0, rounding_mm])
         union() {
             linear_extrude(outer_kernel_height_mm)
@@ -52,6 +53,23 @@ module hanger() {
                 cube([lower_overlap_width_mm, outer_kernel_depth_mm, thickness_mm-2*rounding_mm]);
 
         }
+
+        // side holes
+        hole_width_mm = inner_depth_mm-2*overlap_length_mm;
+        hole_kernel_width_mm = hole_width_mm+2*rounding_mm;
+        hole_length_mm = inner_height_mm-2*overlap_length_mm;
+        hole_kernel_length_mm = hole_length_mm+2*rounding_mm;
+        translate([0,outer_depth_mm/2,thickness_mm + inner_height_mm/2])
+        rotate([0,90,0])
+        translate([-(hole_kernel_length_mm-hole_kernel_width_mm)/2,0,-outer_width_mm/2])
+        linear_extrude(outer_width_mm)
+        hull() {
+            $fn = 30;
+            circle(d=hole_kernel_width_mm);
+            translate([hole_kernel_length_mm-hole_kernel_width_mm,0,0]) circle(d=hole_kernel_width_mm);
+        }
+
+      }
         sphere(r=rounding_mm);
     }
 }
