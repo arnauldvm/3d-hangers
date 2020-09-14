@@ -24,6 +24,7 @@ module hanger() {
     outer_kernel_depth_mm = outer_depth_mm - 2*rounding_mm;
     //inner_kernel_height_mm = actual_depth_mm - rounding_mm;
     outer_kernel_height_mm = outer_height_mm - rounding_mm;
+    overlap_kernel_length_mm = overlap_length_mm - rounding_mm;
 
     translate([0,0,actual_depth_mm/2 + thickness_mm])
     rotate([0,-90,0])
@@ -39,8 +40,8 @@ module hanger() {
                     square([outer_kernel_width_mm, outer_kernel_depth_mm]);
                 translate([-inner_kernel_width_mm/2,thickness_mm+rounding_mm])
                     offset(r=2*rounding_mm) square([inner_kernel_width_mm, inner_kernel_depth_mm]);
-                translate([-actual_width_mm/2 + overlap_length_mm - rounding_mm, thickness_mm+rounding_mm, 0])
-                    square([actual_width_mm - 2*overlap_length_mm + 2*rounding_mm, outer_kernel_depth_mm]);
+                translate([-actual_width_mm/2 + overlap_kernel_length_mm, thickness_mm+rounding_mm, 0])
+                    square([actual_width_mm - 2*overlap_kernel_length_mm, outer_kernel_depth_mm]);
             }
 
             // lower overlap
