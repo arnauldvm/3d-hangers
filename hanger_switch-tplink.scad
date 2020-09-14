@@ -13,22 +13,25 @@ actual_width_mm = switch_width_mm + play_mm;
 actual_depth_mm = switch_depth_mm + play_mm;
 actual_height_mm = switch_height_mm + play_mm;
 
-outer_width_mm = actual_width_mm + 2*thickness_mm;
-outer_depth_mm = actual_height_mm + 2*thickness_mm;
-outer_height_mm = actual_depth_mm + thickness_mm;
+inner_width_mm = actual_width_mm;
+inner_height_mm = actual_depth_mm;
+inner_depth_mm = actual_height_mm;
+outer_width_mm = inner_width_mm + 2*thickness_mm;
+outer_depth_mm = inner_depth_mm + 2*thickness_mm;
+outer_height_mm = inner_height_mm + thickness_mm;
 
 module hanger() {
-    inner_kernel_width_mm = actual_width_mm - 2*rounding_mm;
+    inner_kernel_width_mm = inner_width_mm - 2*rounding_mm;
     outer_kernel_width_mm = outer_width_mm - 2*rounding_mm;
-    inner_kernel_depth_mm = actual_height_mm - 2*rounding_mm;
+    inner_kernel_depth_mm = inner_depth_mm - 2*rounding_mm;
     outer_kernel_depth_mm = outer_depth_mm - 2*rounding_mm;
-    //inner_kernel_height_mm = actual_depth_mm - rounding_mm;
+    //inner_kernel_height_mm = inner_height_mm - rounding_mm;
     outer_kernel_height_mm = outer_height_mm - rounding_mm;
     overlap_kernel_length_mm = overlap_length_mm - rounding_mm;
 
-    translate([0,0,actual_depth_mm/2 + thickness_mm])
+    translate([0,0,inner_height_mm/2 + thickness_mm])
     rotate([0,-90,0])
-    translate([0, 0, -actual_width_mm/2 - thickness_mm + rounding_mm])
+    translate([0, 0, -inner_width_mm/2 - thickness_mm + rounding_mm])
     translate([0, 0, rounding_mm])
     minkowski() {
         $fn = 12; // no need for many facets here
@@ -39,9 +42,8 @@ module hanger() {
                 translate([-outer_kernel_width_mm/2,rounding_mm])
                     square([outer_kernel_width_mm, outer_kernel_depth_mm]);
                 translate([-inner_kernel_width_mm/2,thickness_mm+rounding_mm])
-                    offset(r=2*rounding_mm) square([inner_kernel_width_mm, inner_kernel_depth_mm]);
-                translate([-actual_width_mm/2 + overlap_kernel_length_mm, thickness_mm+rounding_mm, 0])
-                    square([actual_width_mm - 2*overlap_kernel_length_mm, outer_kernel_depth_mm]);
+                translate([-inner_width_mm/2 + overlap_kernel_length_mm, thickness_mm+rounding_mm, 0])
+                    square([inner_width_mm - 2*overlap_kernel_length_mm, outer_kernel_depth_mm]);
             }
 
             // lower overlap
