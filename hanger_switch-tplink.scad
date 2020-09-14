@@ -13,8 +13,8 @@ actual_width_mm = switch_width_mm + play_mm;
 actual_depth_mm = switch_depth_mm + play_mm;
 actual_height_mm = switch_height_mm + play_mm;
 
-inner_width_mm = actual_width_mm;
-inner_height_mm = actual_depth_mm;
+inner_width_mm = actual_depth_mm;
+inner_height_mm = actual_width_mm;
 inner_depth_mm = actual_height_mm;
 outer_width_mm = inner_width_mm + 2*thickness_mm;
 outer_depth_mm = inner_depth_mm + 2*thickness_mm;
@@ -29,9 +29,6 @@ module hanger() {
     outer_kernel_height_mm = outer_height_mm - rounding_mm;
     overlap_kernel_length_mm = overlap_length_mm - rounding_mm;
 
-    translate([0,0,outer_height_mm/2])
-    rotate([0,-90,0])
-    translate([0, 0, -outer_width_mm/2])
     minkowski() {
         $fn = 12; // no need for many facets here
        translate([0, 0, rounding_mm])
@@ -60,5 +57,5 @@ module hanger() {
 }
 
 hanger();
-translate([0,0,outer_width_mm/2])
+translate([0,0,outer_height_mm/2])
     mirror([0,1,0]) rails_x2("x");
