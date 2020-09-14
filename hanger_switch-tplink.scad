@@ -32,9 +32,9 @@ module hanger() {
     translate([0,0,inner_height_mm/2 + thickness_mm])
     rotate([0,-90,0])
     translate([0, 0, -inner_width_mm/2 - thickness_mm + rounding_mm])
-    translate([0, 0, rounding_mm])
     minkowski() {
         $fn = 12; // no need for many facets here
+       translate([0, 0, rounding_mm])
         union() {
             linear_extrude(outer_kernel_height_mm)
             // extrusion base
