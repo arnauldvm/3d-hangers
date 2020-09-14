@@ -42,6 +42,7 @@ module hanger() {
                 translate([-outer_kernel_width_mm/2,rounding_mm])
                     square([outer_kernel_width_mm, outer_kernel_depth_mm]);
                 translate([-inner_kernel_width_mm/2,thickness_mm+rounding_mm])
+                    offset(delta=2*rounding_mm) square([inner_kernel_width_mm, inner_kernel_depth_mm]);
                 translate([-inner_width_mm/2 + overlap_kernel_length_mm, thickness_mm+rounding_mm, 0])
                     square([inner_width_mm - 2*overlap_kernel_length_mm, outer_kernel_depth_mm]);
             }
