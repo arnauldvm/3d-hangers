@@ -63,8 +63,7 @@ module hanger() {
         hole_kernel_length_mm = hole_length_mm+2*rounding_mm;
         translate([0,outer_depth_mm/2,thickness_mm + inner_height_mm/2])
         rotate([0,90,0])
-        translate([0,0,-outer_width_mm/2])
-        linear_extrude(outer_width_mm)
+        linear_extrude(outer_width_mm, center=true)
         stadium(d=hole_kernel_width_mm, a=hole_kernel_length_mm-hole_kernel_width_mm, $fn=30);
 
         // back holes
