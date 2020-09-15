@@ -12,3 +12,36 @@ module stadium(r,d,a,center=true) {
 
 //stadium(d=10, a=20, $fn=30);
 //stadium(d=10, a=20, center=false);
+
+module pie_slice(r, angle) {
+    sa = sin(angle);
+    ca = cos(angle);
+    ta = tan(angle);
+    conv = sa>0?2:4;
+    if (ca>=0) {
+        v = [[0,0],[r,0],[r,r*ta]];
+        if (sa>=0) {
+            intersection() {
+                circle(r);
+                polygon(v, 2);
+            }
+        } else {
+            difference() {
+                circle(r);
+                polygon(v, 2);
+            }
+        }
+    } else {
+        v = [[0,0],[r,0],[r,r],[-r,r],[-r,-r*ta]];
+        conv = sa>=0?2:4;
+        intersection() {
+            circle(r);
+            polygon(v, conv);
+        }
+    } 
+}
+
+// !pie_slice(10, 60);
+// !pie_slice(10, 120);
+// !pie_slice(10, -120);
+// !pie_slice(10, -60);
