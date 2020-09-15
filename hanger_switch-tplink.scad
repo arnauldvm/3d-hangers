@@ -10,6 +10,7 @@ switch_depth_mm = 98.6;
 switch_height_mm = 25.7; // 26+0.1 = 25.85 measured
 play_mm = 0.3;
 back_holes_diam_mm = 15;
+back_holes_z_count = 3;
 
 actual_width_mm = switch_width_mm + play_mm;
 actual_depth_mm = switch_depth_mm + play_mm;
@@ -67,7 +68,7 @@ module hanger() {
         stadium(d=hole_kernel_width_mm, a=hole_kernel_length_mm-hole_kernel_width_mm, $fn=30);
 
         // back holes
-        for (z = [thickness_mm+inner_height_mm/3/2 : inner_height_mm/3 : outer_height_mm-inner_height_mm/3/2],
+        for (z = [thickness_mm+inner_height_mm/back_holes_z_count/2 : inner_height_mm/back_holes_z_count : outer_height_mm-inner_height_mm/back_holes_z_count/2],
              x = [-inner_width_mm/3, 0, inner_width_mm/3]) {
             $fn = 30;
             translate([x,0,z])
