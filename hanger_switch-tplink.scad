@@ -1,4 +1,5 @@
 use <modules/fixing.scad>
+use <modules/shapes.scad>
 
 rounding_mm = 2;
 thickness_mm = 5;
@@ -20,17 +21,6 @@ inner_depth_mm = actual_height_mm;
 outer_width_mm = inner_width_mm + 2*thickness_mm;
 outer_depth_mm = inner_depth_mm + 2*thickness_mm;
 outer_height_mm = inner_height_mm + thickness_mm;
-
-// See also https://en.wikipedia.org/wiki/Stadium_(geometry)
-module stadium(r,d,a,center=true) {
-    d = (d==undef)?2*r:d;
-    dx = center?0:a-d/2;
-    dy = center?0:d/2;
-    hull() {
-        translate([dx-a/2,dy,0]) circle(d=d);
-        translate([dx+a/2,dy,0]) circle(d=d);
-    }
-}
 
 module hanger() {
     inner_kernel_width_mm = inner_width_mm - 2*rounding_mm;
