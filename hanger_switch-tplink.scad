@@ -10,6 +10,7 @@ module hanger(
     switch_depth_mm,
     switch_height_mm,
     overlap_length_mm = 4,
+    side_overlap_length_mm = 4,
     back_holes_diam_mm = 15,
     back_holes_z_count = 3,
     back_holes_x_count = 3
@@ -59,9 +60,9 @@ module hanger(
         }
 
         // side holes
-        hole_width_mm = inner_depth_mm-2*overlap_length_mm;
+        hole_width_mm = inner_depth_mm-2*side_overlap_length_mm;
         hole_kernel_width_mm = hole_width_mm+2*rounding_mm;
-        hole_length_mm = inner_height_mm-2*overlap_length_mm;
+        hole_length_mm = inner_height_mm-2*side_overlap_length_mm;
         hole_kernel_length_mm = hole_length_mm+2*rounding_mm;
         translate([0,outer_depth_mm/2,thickness_mm + inner_height_mm/2])
         rotate([0,90,0])
