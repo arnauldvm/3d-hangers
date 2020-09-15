@@ -21,6 +21,17 @@ outer_width_mm = inner_width_mm + 2*thickness_mm;
 outer_depth_mm = inner_depth_mm + 2*thickness_mm;
 outer_height_mm = inner_height_mm + thickness_mm;
 
+// See also https://en.wikipedia.org/wiki/Stadium_(geometry)
+module stadium(r,d,a,center=true) {
+    d = (d==undef)?2*r:d;
+    dx = center?0:a-d/2;
+    dy = center?0:d/2;
+    hull() {
+        translate([dx-a/2,dy,0]) circle(d=d);
+        translate([dx+a/2,dy,0]) circle(d=d);
+    }
+}
+
 module hanger() {
     inner_kernel_width_mm = inner_width_mm - 2*rounding_mm;
     outer_kernel_width_mm = outer_width_mm - 2*rounding_mm;
@@ -62,13 +73,9 @@ module hanger() {
         hole_kernel_length_mm = hole_length_mm+2*rounding_mm;
         translate([0,outer_depth_mm/2,thickness_mm + inner_height_mm/2])
         rotate([0,90,0])
-        translate([-(hole_kernel_length_mm-hole_kernel_width_mm)/2,0,-outer_width_mm/2])
+        translate([0,0,-outer_width_mm/2])
         linear_extrude(outer_width_mm)
-        hull() {
-            $fn = 30;
-            circle(d=hole_kernel_width_mm);
-            translate([hole_kernel_length_mm-hole_kernel_width_mm,0,0]) circle(d=hole_kernel_width_mm);
-        }
+        stadium(d=hole_kernel_width_mm, a=hole_kernel_length_mm-hole_kernel_width_mm, $fn=30);
 
         // back holes
         for (z = [thickness_mm+inner_height_mm/3/2 : inner_height_mm/3 : outer_height_mm-inner_height_mm/3/2],
