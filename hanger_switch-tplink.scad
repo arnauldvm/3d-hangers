@@ -70,9 +70,9 @@ module hanger() {
         for (z = [thickness_mm+inner_height_mm/3/2 : inner_height_mm/3 : outer_height_mm-inner_height_mm/3/2],
              x = [-inner_width_mm/3, 0, inner_width_mm/3]) {
             $fn = 30;
-            translate([x,thickness_mm/2,z])
-            rotate([90,0,0])
-            cylinder(d=back_holes_diam_mm+2*rounding_mm, h=thickness_mm, center=true);
+            translate([x,0,z])
+            rotate([-90,0,0])
+            cylinder(d=back_holes_diam_mm+2*rounding_mm, h=thickness_mm);
         }
 
       }
