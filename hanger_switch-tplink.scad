@@ -3,28 +3,28 @@ use <modules/shapes.scad>
 
 rounding_mm = 2;
 thickness_mm = 5;
-overlap_length_mm = 4;
-
-switch_width_mm = 100.0; // 100+0.1 = 99.8 measured
-switch_depth_mm = 98.6;
-switch_height_mm = 25.7; // 26+0.1 = 25.85 measured
 play_mm = 0.3;
-back_holes_diam_mm = 15;
-back_holes_z_count = 3;
-back_holes_x_count = 3;
 
-actual_width_mm = switch_width_mm + play_mm;
-actual_depth_mm = switch_depth_mm + play_mm;
-actual_height_mm = switch_height_mm + play_mm;
+module hanger(
+    switch_width_mm,
+    switch_depth_mm,
+    switch_height_mm,
+    overlap_length_mm = 4,
+    back_holes_diam_mm = 15,
+    back_holes_z_count = 3,
+    back_holes_x_count = 3
+) {
+    actual_width_mm = switch_width_mm + play_mm;
+    actual_depth_mm = switch_depth_mm + play_mm;
+    actual_height_mm = switch_height_mm + play_mm;
 
-inner_width_mm = actual_depth_mm;
-inner_height_mm = actual_width_mm;
-inner_depth_mm = actual_height_mm;
-outer_width_mm = inner_width_mm + 2*thickness_mm;
-outer_depth_mm = inner_depth_mm + 2*thickness_mm;
-outer_height_mm = inner_height_mm + thickness_mm;
+    inner_width_mm = actual_depth_mm;
+    inner_height_mm = actual_width_mm;
+    inner_depth_mm = actual_height_mm;
+    outer_width_mm = inner_width_mm + 2*thickness_mm;
+    outer_depth_mm = inner_depth_mm + 2*thickness_mm;
+    outer_height_mm = inner_height_mm + thickness_mm;
 
-module hanger() {
     inner_kernel_width_mm = inner_width_mm - 2*rounding_mm;
     outer_kernel_width_mm = outer_width_mm - 2*rounding_mm;
     inner_kernel_depth_mm = inner_depth_mm - 2*rounding_mm;
@@ -80,8 +80,13 @@ module hanger() {
       }
         sphere(r=rounding_mm);
     }
+
+    translate([0,0,outer_height_mm/2])
+        mirror([0,1,0]) rails_x2("x");
 }
 
-hanger();
-translate([0,0,outer_height_mm/2])
-    mirror([0,1,0]) rails_x2("x");
+hanger(
+    switch_width_mm = 100.0, // 100+0.1 = 99.8 measured
+    switch_depth_mm = 98.6,
+    switch_height_mm = 25.7 // 26+0.1 = 25.85 measured
+);
