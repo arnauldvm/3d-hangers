@@ -1,9 +1,7 @@
 use <fixing.scad>
 use <shapes.scad>
 
-rounding_mm = 2;
-thickness_mm = 5;
-play_mm = 0.3;
+include <hanger.inc.scad>
 
 module hanger(
     switch_width_mm,
