@@ -11,7 +11,8 @@ module hanger(
     side_overlap_length_mm = 4,
     back_holes_diam_mm = 15,
     back_holes_z_count = 3,
-    back_holes_x_count = 3
+    back_holes_x_count = 3,
+    rail_offset_x_mm = 0
 ) {
     actual_width_mm = switch_width_mm + play_mm;
     actual_depth_mm = switch_depth_mm + play_mm;
@@ -80,6 +81,6 @@ module hanger(
         sphere(r=rounding_mm);
     }
 
-    translate([0,0,outer_height_mm/2])
+    translate([rail_offset_x_mm,0,outer_height_mm/2])
         mirror([0,1,0]) rails_x2("x");
 }
