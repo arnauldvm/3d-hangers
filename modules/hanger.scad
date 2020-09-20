@@ -8,12 +8,15 @@ module hanger(
     switch_depth_mm,
     switch_height_mm,
     overlap_length_mm = 4,
+    lower_overlap_length_mm = undef, // defaults to overlap_length_mm
     side_overlap_length_mm = 4,
     back_holes_diam_mm = 15,
     back_holes_z_count = 3,
     back_holes_x_count = 3,
     rail_offset_x_mm = 0
 ) {
+    lower_overlap_length_mm = (lower_overlap_length_mm==undef)?overlap_length_mm:lower_overlap_length_mm;
+
     actual_width_mm = switch_width_mm + play_mm;
     actual_depth_mm = switch_depth_mm + play_mm;
     actual_height_mm = switch_height_mm + play_mm;
@@ -50,7 +53,7 @@ module hanger(
             }
 
             // lower overlap
-            lower_overlap_width_mm = thickness_mm + overlap_length_mm - 2*rounding_mm;
+            lower_overlap_width_mm = thickness_mm + lower_overlap_length_mm - 2*rounding_mm;
             translate([outer_kernel_width_mm/2-lower_overlap_width_mm,rounding_mm,0])
                 cube([lower_overlap_width_mm, outer_kernel_depth_mm, thickness_mm-2*rounding_mm]);
             translate([-outer_kernel_width_mm/2,rounding_mm,0])
