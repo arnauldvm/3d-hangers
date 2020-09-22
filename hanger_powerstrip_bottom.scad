@@ -5,7 +5,7 @@ powerstrip_width_mm = 75.15;
 powerstrip_thickness_mm = 41;
 powerstrip_small_thickness_mm = 35.7;
 hanger_length_mm = 60; // arbitrary
-overlap_length_mm = 12.5; // free space is 12.9
+overlap_length_mm = 12.5; // free space is 12.9 + 5
 cable_connector_diam_mm = 23.25;
 
 // union() {
