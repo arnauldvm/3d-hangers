@@ -4,9 +4,9 @@ use <shapes.scad>
 include <hanger.inc.scad>
 
 module hanger(
-    switch_width_mm,
-    switch_depth_mm,
-    switch_height_mm,
+    hanger_height_mm,
+    hanger_width_mm,
+    hanger_depth_mm,
     overlap_length_mm = 4,
     lower_overlap_length_mm = undef, // defaults to overlap_length_mm
     side_overlap_length_mm = 4,
@@ -17,13 +17,13 @@ module hanger(
 ) {
     lower_overlap_length_mm = (lower_overlap_length_mm==undef)?overlap_length_mm:lower_overlap_length_mm;
 
-    actual_width_mm = switch_width_mm + play_mm;
-    actual_depth_mm = switch_depth_mm + play_mm;
-    actual_height_mm = switch_height_mm + play_mm;
+    actual_height_mm = hanger_height_mm + play_mm;
+    actual_width_mm = hanger_width_mm + play_mm;
+    actual_depth_mm = hanger_depth_mm + play_mm;
 
-    inner_width_mm = actual_depth_mm;
-    inner_height_mm = actual_width_mm;
-    inner_depth_mm = actual_height_mm;
+    inner_width_mm = actual_width_mm;
+    inner_height_mm = actual_height_mm;
+    inner_depth_mm = actual_depth_mm;
     outer_width_mm = inner_width_mm + 2*thickness_mm;
     outer_depth_mm = inner_depth_mm + 2*thickness_mm;
     outer_height_mm = inner_height_mm + thickness_mm;

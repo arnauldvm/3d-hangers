@@ -14,9 +14,9 @@ difference() {
     union() {
         rail_offset_x_mm = plug_male_dist_mm+plug_male_diam_mm/2+socket_outer_diam_mm/2+spacing_mm+beam_width_mm/2+thickness_mm - devolo_face_length_mm/2;
         hanger(
-            switch_width_mm = devolo_face_width_mm,
-            switch_depth_mm = devolo_face_length_mm,
-            switch_height_mm = devolo_depth_mm,
+            hanger_height_mm = devolo_face_width_mm,
+            hanger_width_mm = devolo_face_length_mm,
+            hanger_depth_mm = devolo_depth_mm,
             overlap_length_mm = 9,
             back_holes_diam_mm = 40,
             back_holes_z_count = 1,

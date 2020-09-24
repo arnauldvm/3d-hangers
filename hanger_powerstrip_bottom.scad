@@ -10,9 +10,9 @@ cable_connector_diam_mm = 23.25;
 
 // union() {
     hanger(
-        switch_width_mm = hanger_length_mm,
-        switch_depth_mm = powerstrip_width_mm,
-        switch_height_mm = powerstrip_thickness_mm,
+        hanger_height_mm = hanger_length_mm,
+        hanger_width_mm = powerstrip_width_mm,
+        hanger_depth_mm = powerstrip_thickness_mm,
         overlap_length_mm = overlap_length_mm,
         lower_overlap_length_mm = (powerstrip_width_mm-cable_connector_diam_mm)/2, // = 25.95
         side_overlap_length_mm = 6.5, // free space is 6.7
