@@ -13,6 +13,15 @@ module stadium(r,d,a,center=true) {
 //stadium(d=10, a=20, $fn=30);
 //stadium(d=10, a=20, center=false);
 
+module quadrant(r) {
+    intersection() {
+        circle(r);
+        square(r);
+    }
+}
+
+// quadrant(r=20);
+
 module pie_slice(r, angle) {
     sa = sin(angle);
     ca = cos(angle);
