@@ -1,7 +1,7 @@
 use <modules/devolo.scad>
 use <modules/hanger.scad>
 
-beam_width_mm = 40;
+include <modules/fixing.inc.scad>
 include <modules/hanger.inc.scad>
 include <modules/devolo.inc.scad>
 
