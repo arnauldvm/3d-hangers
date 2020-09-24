@@ -29,7 +29,7 @@ module semicircle(r) {
     }
 }
 
-semicircle(r=20);
+// semicircle(r=20);
 
 module pie_slice(r, angle) {
     sa = sin(angle);
