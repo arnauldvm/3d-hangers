@@ -22,6 +22,15 @@ module quadrant(r) {
 
 // quadrant(r=20);
 
+module semicircle(r) {
+    intersection() {
+        circle(r);
+        translate([-r,0]) square([2*r,r]);
+    }
+}
+
+semicircle(r=20);
+
 module pie_slice(r, angle) {
     sa = sin(angle);
     ca = cos(angle);
