@@ -17,7 +17,7 @@ kernel_cablefeed_width_mm = cablefeed_width_mm - 2*rounding_mm;
 minkowski() {
     $fn = 12; // no need for many facets here
     difference() {
-        translate([(thickness_mm-overlap_width_mm)/2, thickness_mm/2])
+        translate([(thickness_mm-overlap_width_mm)/2, rounding_mm])
         linear_extrude(hanger_height_mm, center=true)
         union() {
             $fn = 60;
