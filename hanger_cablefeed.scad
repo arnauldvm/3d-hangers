@@ -20,7 +20,7 @@ minkowski() {
         translate([(thickness_mm-overlap_width_mm)/2, thickness_mm/2])
         linear_extrude(hanger_height_mm, center=true)
         union() {
-            $fn = 30;
+            $fn = 60;
             translate([-kernel_cablefeed_width_mm/2, 0])
             square([kernel_cablefeed_width_mm, kernel_thickness_mm]);
 
@@ -39,7 +39,7 @@ minkowski() {
         }
         rotate([0,90,90])
         linear_extrude(thickness_mm, center=false)
-        stadium(d=hole_width_mm, a=hanger_height_mm-2*overlap_length_mm-hole_width_mm, center=true);
+        stadium(d=hole_width_mm, a=hanger_height_mm-2*overlap_length_mm-hole_width_mm, center=true, $fn=30);
     }
     sphere(r=rounding_mm);
 }
