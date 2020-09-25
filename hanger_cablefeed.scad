@@ -3,7 +3,7 @@ include <modules/fixing.inc.scad>
 include <modules/hanger.inc.scad>
 use <modules/fixing.scad>
 
-max_cable_diam_mm = 5/2; // we make it smaller, since we can flex the PETG a bit
+max_cable_diam_mm = 5;
 
 cablefeed_width_mm = beam_width_mm+overlap_width_mm+thickness_mm;
 hanger_big_depth_mm = cablefeed_width_mm/2 + rounding_mm;
